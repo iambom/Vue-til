@@ -8,8 +8,9 @@
 </template>
 
 <script>
-import AppHeader from "@/components/common/AppHeader.vue";
-
+import AppHeader from '@/components/common/AppHeader.vue';
+var a = 'hi';
+const b = 'hello';
 export default {
   components: {
     AppHeader,
@@ -17,5 +18,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

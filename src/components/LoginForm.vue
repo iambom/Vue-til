@@ -8,22 +8,15 @@
       <label for="password">pw: </label>
       <input id="password" type="text" v-model="password" />
     </div>
-    <div>
-      <label for="nickname">nickname: </label>
-      <input id="nickname" type="text" v-model="nickname" />
-    </div>
-    <button
-      :disabled="!isUsernameValid || !password || !nickname"
-      type="submit"
-    >
-      회원 가입
+    <button :disabled="!isUsernameValid || !password" type="submit">
+      로그인
     </button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
-import { registerUser } from '@/api/index.js';
+import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
 
 export default {
@@ -31,7 +24,6 @@ export default {
     return {
       username: '',
       password: '',
-      nickname: '',
       logMessage: '',
     };
   },
@@ -42,24 +34,29 @@ export default {
   },
   methods: {
     async submitForm() {
-      console.log('폼 제출');
-      const userData = {
-        username: this.username,
-        password: this.password,
-        nickname: this.nickname,
-      };
-      const { data } = await registerUser(userData);
-      console.log(data);
-      this.logMessage = `${data.username}님이 가입되었습니다.`;
-      this.initForm();
+      try {
+        const userData = {
+          username: this.username,
+          password: this.password,
+        };
+        const { data } = await loginUser(userData);
+        console.log(data);
+        this.logMessage = `${data.user.nickname}님 환영합니다.`;
+      } catch (error) {
+        // network 패널의 response 탭에서 확인 가능
+        // UX를 위해서 console이 아니라 화면에 표시해주어야 함
+        // console.log(error.response.data);
+        this.logMessage = error.response.data;
+      } finally {
+        this.initForm();
+      }
     },
     initForm() {
       this.username = '';
       this.password = '';
-      this.nickname = '';
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped></style>
