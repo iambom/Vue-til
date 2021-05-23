@@ -1,12 +1,12 @@
 <template>
   <div>
-    <p>회원가입 페이지</p>
+    <h1 class="page-header">회원 가입 페이지</h1>
     <signup-form></signup-form>
   </div>
 </template>
 
 <script>
-import SignupForm from "../components/SignupForm.vue";
+import SignupForm from '@/components/SignupForm.vue';
 
 export default {
   components: {
@@ -15,5 +15,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
