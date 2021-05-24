@@ -53,8 +53,10 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
-        console.log(data);
-        this.logMessage = `${data.user.nickname}님 환영합니다.`;
+        // console.log(data);
+        this.$router.push('/main');
+        this.$store.commit('setUsername', data.user.nickname);
+        // this.logMessage = `${data.user.nickname}님 환영합니다.`;
       } catch (error) {
         // network 패널의 response 탭에서 확인 가능
         // UX를 위해서 console이 아니라 화면에 표시해주어야 함
