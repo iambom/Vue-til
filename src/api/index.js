@@ -1,13 +1,20 @@
 import axios from 'axios';
+import store from '@/store/index';
+import { setInterceptors } from './common/interceptors';
 
-const instance = axios.create({
-  // VUE_APP 을 붙이면 definePlugin 사용할 필요없이 .env 파일의 값이 불려짐
-  baseURL: process.env.VUE_APP_API_URL,
-});
+function createInstance() {
+  const instance = axios.create({
+    baseURL: process.env.VUE_APP_API_URL,
+    headers: {
+      Authorization: store.state.token,
+    },
+  });
+  return setInterceptors(instance);
+}
+
+const instance = createInstance();
 
 function registerUser(userData) {
-  // const url = 'http://localhost:3000/signup';
-  // return axios.post(url, userData);
   return instance.post('signup', userData);
 }
 

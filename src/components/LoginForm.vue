@@ -53,14 +53,11 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
-        // console.log(data);
-        this.$router.push('/main');
+        // console.log(data.token);
+        this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.nickname);
-        // this.logMessage = `${data.user.nickname}님 환영합니다.`;
+        this.$router.push('/main');
       } catch (error) {
-        // network 패널의 response 탭에서 확인 가능
-        // UX를 위해서 console이 아니라 화면에 표시해주어야 함
-        // console.log(error.response.data);
         this.logMessage = error.response.data;
       } finally {
         this.initForm();
