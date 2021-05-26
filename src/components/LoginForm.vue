@@ -53,7 +53,7 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
-        // console.log(data.token);
+        console.log('LoginForm ', data.token);
         this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.nickname);
         this.$router.push('/main');
