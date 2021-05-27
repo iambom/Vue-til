@@ -53,12 +53,8 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        console.log('LoginForm ', data.token);
-        this.$store.commit('setToken', data.token);
-        this.$store.commit('setUsername', data.user.nickname);
-        saveAuthToCookie(data.token);
-        saveUserToCookie(data.user.nickname);
+        // LOGIN 에서 비동기처리가 끝나고 main 페이지로 진입해야하므로 await 붙여주어야한다
+        await this.$store.dispatch('LOGIN', userData);
         this.$router.push('/main');
       } catch (error) {
         this.logMessage = error.response.data;
