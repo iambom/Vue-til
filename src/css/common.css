@@ -88,10 +88,11 @@ a:hover {
   margin-bottom: 1rem;
 }
 .form input.valid {
-  border: 1px solid #21b314;
+  border: 2px solid #21b314;
 }
-.form input.invalid {
-  border: 1px solid red;
+.form input.invalid,
+.form textarea.invalid  {
+  border: 2px solid red;
 }
 .form div:nth-last-child(2) {
   margin-bottom: 0.5rem;
