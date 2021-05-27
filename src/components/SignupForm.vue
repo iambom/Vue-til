@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { registerUser } from '@/api/index.js';
+import { registerUser } from '@/api/auth.js';
 import { validateEmail } from '@/utils/validation';
 
 export default {
@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     async submitForm() {
-      console.log('폼 제출');
       const userData = {
         username: this.username,
         password: this.password,
@@ -57,6 +56,7 @@ export default {
       console.log(data);
       this.logMessage = `${data.username}님이 가입되었습니다.`;
       this.initForm();
+      this.$router.push('/login');
     },
     initForm() {
       this.username = '';

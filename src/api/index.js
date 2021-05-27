@@ -3,9 +3,13 @@ import store from '@/store/index';
 import { setInterceptors } from './common/interceptors';
 
 function createInstance() {
-  console.log(store);
-  const instance = axios.create({
+  return axios.create({
     baseURL: process.env.VUE_APP_API_URL,
+  });
+}
+function createInstanceWithAuth(url) {
+  const instance = axios.create({
+    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
     headers: {
       Authorization: store?.state?.token,
     },
@@ -13,22 +17,15 @@ function createInstance() {
   return setInterceptors(instance);
 }
 
-const instance = createInstance();
+export const instance = createInstance();
+export const posts = createInstanceWithAuth('posts');
 
-function registerUser(userData) {
-  return instance.post('signup', userData);
-}
+// function fetchPosts() {
+//   return instance.get('posts');
+// }
 
-function loginUser(userData) {
-  return instance.post('login', userData);
-}
+// function createPost(postData) {
+//   return instance.post('posts', postData);
+// }
 
-function fetchPosts() {
-  return instance.get('posts');
-}
-
-function createPost(postData) {
-  return instance.post('posts', postData);
-}
-
-export { registerUser, loginUser, fetchPosts, createPost };
+// export { fetchPosts, createPost };

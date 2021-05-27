@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { createPost } from '@/api/index';
+import { createPost } from '@/api/posts';
 
 export default {
   data() {
