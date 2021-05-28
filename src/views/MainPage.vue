@@ -35,7 +35,6 @@ export default {
     async fetchData() {
       this.isLoading = true;
       const { data } = await fetchPosts();
-      console.log('mainpage ', data);
       this.isLoading = false;
       this.postItems = data.posts;
     },
